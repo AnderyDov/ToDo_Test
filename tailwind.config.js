@@ -1,5 +1,5 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
-  themes: ["fantasy", "black"],
+  themes: ["fantasy", "luxury"],
   plugins: [require("daisyui")]
 };
