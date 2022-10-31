@@ -14,7 +14,7 @@ export function List() {
   let showList = [...list].map((el) => {
     return (
       <li
-        className="relative m-4 indent-4  border-b-[0.5px] flex items-center"
+        className="relative m-4 indent-4  border-b-[0.5px] flex items-center cursor-pointer"
         key={el.id}
       >
         <div className="w-5 h-5  rounded-full outline outline-1 p-1">
@@ -42,7 +42,7 @@ export function List() {
           type="radio"
           name="options"
           data-title="all"
-          className="btn btn-ghost btn-sm"
+          className="btn btn-ghost btn-sm text-[10px]"
         >
           All
         </button>
@@ -50,7 +50,7 @@ export function List() {
           type="radio"
           name="options"
           data-title="active"
-          className="btn btn-ghost btn-sm"
+          className="btn btn-ghost btn-sm text-[10px]"
         >
           Active
         </button>
@@ -58,17 +58,19 @@ export function List() {
           type="radio"
           name="options"
           data-title="completed"
-          className="btn btn-ghost btn-sm"
+          className="btn btn-ghost btn-sm text-[10px]"
         >
           Completed
         </button>
       </div>
-      <button className="btn btn-ghost btn-sm">Clear completed</button>
+      <button className="btn btn-ghost btn-sm text-[10px]">
+        Clear completed
+      </button>
     </div>
   );
 
   let out = (
-    <div className="w-6/12  mt-7 border rounded-md">
+    <div className="w-6/12 min-w-[500px]  mt-7 border rounded-md">
       <ol>{showList}</ol>
       {panel}
     </div>
