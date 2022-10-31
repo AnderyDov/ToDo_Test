@@ -1,24 +1,35 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SvgComponent from "../components/SvgComponent";
+import { delTask } from "../store/appSlice";
 
 export function List() {
+  const dispatch = useDispatch();
   const list = useSelector((state) => state.app.list);
-  console.log(list);
 
-  let showList = [...list].map((el, i) => {
+  function deleteItem(e) {
+    dispatch(delTask({ idString: e.target.id }));
+  }
+
+  let showList = [...list].map((el) => {
     return (
       <li
-        className="m-4 indent-4  border-b-[0.5px] flex justify-between items-center"
-        key={i}
+        className="relative m-4 indent-4  border-b-[0.5px] flex items-center"
+        key={el.id}
       >
-        <div className="w-5 h-5 rounded-full outline outline-1 p-1">
+        <div className="w-5 h-5  rounded-full outline outline-1 p-1">
           {el.status === "complited" && <SvgComponent name="moon" />}
         </div>
-        <span>
+        <span className="flex items-center overflow-hidden max-w-[70%]">
           {el.text}{" "}
-          <button className="btn btn-xs btn-ghost ml-2 text-[10px]">del</button>{" "}
         </span>
+        <button
+          className="absolute btn btn-xs btn-ghost text-[10px] flex self-center right-0"
+          id={el.id}
+          onClick={deleteItem}
+        >
+          del
+        </button>
       </li>
     );
   });

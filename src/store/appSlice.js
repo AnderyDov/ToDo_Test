@@ -4,12 +4,7 @@ const appSlice = createSlice({
   name: "app",
   initialState: {
     theme: true, // Тема по умолччанию тёмная
-    list: [
-      {
-        text: "ppp",
-        status: "active"
-      }
-    ]
+    list: []
   },
   reducers: {
     setTheme(state, action) {
@@ -17,13 +12,19 @@ const appSlice = createSlice({
     },
     addTask(state, action) {
       state.list.push({
+        id: action.payload.idString,
         text: action.payload.textString,
         status: "active"
+      });
+    },
+    delTask(state, action) {
+      state.list = state.list.filter((el) => {
+        return el.id !== action.payload.idString;
       });
     }
   }
 });
 
-export const { setTheme, addTask } = appSlice.actions;
+export const { setTheme, addTask, delTask } = appSlice.actions;
 
 export default appSlice.reducer;
