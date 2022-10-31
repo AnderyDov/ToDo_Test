@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import ToggleTheme from "./components/ToggleTheme";
 import { useSelector } from "react-redux";
+import { List } from "./store/List";
 
 export default function App() {
   const theme = useSelector((state) => state.app.theme);
@@ -12,7 +13,8 @@ export default function App() {
       data-theme={theme ? "luxury" : "fantasy"}
     >
       <ToggleTheme />
-      TODO_LIST
+      TODO LIST
+      <List />
     </div>
   );
 
