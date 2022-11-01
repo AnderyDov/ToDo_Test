@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SvgComponent from "../components/SvgComponent";
 import { delTask, changeTask } from "../store/appSlice";
+import ButtonsPanel from "./ButtonsPanel";
 
 export function List() {
   const dispatch = useDispatch();
@@ -60,45 +61,10 @@ export function List() {
     );
   });
 
-  let panel = (
-    <div className="flex justify-around my-1">
-      <div className="flex items-center">777</div>
-      <div className="flex space-x-1">
-        <button
-          type="radio"
-          name="options"
-          data-title="all"
-          className="btn btn-ghost btn-sm text-[10px]"
-        >
-          All
-        </button>
-        <button
-          type="radio"
-          name="options"
-          data-title="active"
-          className="btn btn-ghost btn-sm text-[10px]"
-        >
-          Active
-        </button>
-        <button
-          type="radio"
-          name="options"
-          data-title="completed"
-          className="btn btn-ghost btn-sm text-[10px]"
-        >
-          Completed
-        </button>
-      </div>
-      <button className="btn btn-ghost btn-sm text-[10px]">
-        Clear completed
-      </button>
-    </div>
-  );
-
   let out = (
     <div className="w-6/12 min-w-[500px]  mt-7 border rounded-md">
       <ol>{showList}</ol>
-      {panel}
+      <ButtonsPanel />
     </div>
   );
 
