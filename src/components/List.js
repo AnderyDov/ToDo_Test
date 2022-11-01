@@ -1,29 +1,20 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import SvgComponent from "../components/SvgComponent";
-import { delTask, changeTask, changeStatus, setCount } from "../store/appSlice";
-import ButtonsPanel from "./ButtonsPanel";
+import { useSelector, useDispatch } from "react-redux"; // Хуки редакса
+import SvgComponent from "../components/SvgComponent"; // Компонент для отрисовки SVG картинок
+import { delTask, changeTask, changeStatus, setCount } from "../store/appSlice"; // Редюсеры управления состоянием приложения
+import ButtonsPanel from "./ButtonsPanel"; // Компонент панель кнопок для управления приложением
 
-export function List() {
+export default function List() {
   const dispatch = useDispatch();
-  const list = useSelector((state) => state.app.list);
-  const filter = useSelector((state) => state.app.filter);
+  const list = useSelector((state) => state.app.list); // Состояние список задач
+  const filter = useSelector((state) => state.app.filter); // Состояние режим фильтрации
 
+  // Функция удаляет задачу по её ID
   function deleteItem(e) {
     dispatch(delTask({ idString: e.target.dataset.id }));
   }
 
-  function endChangeTaskText(e) {
-    let t = e.target.value;
-    dispatch(
-      changeTask({
-        idString: e.target.parentElement.dataset.id,
-        textString: e.target.value
-      })
-    );
-    e.target.parentElement.innerHTML = t;
-  }
-
+  // Фукнция вставляет инпут для редактирования задачи, вешает на него событие потери фокуса
   function startChangeTaskText(e) {
     let t = e.target.textContent;
     let inp = document.createElement("input");
@@ -35,10 +26,24 @@ export function List() {
     inp.onblur = endChangeTaskText;
   }
 
+  // Функция срабатывает при потери фокуса заменяе инпут на его значение
+  function endChangeTaskText(e) {
+    let t = e.target.value;
+    dispatch(
+      changeTask({
+        idString: e.target.parentElement.dataset.id,
+        textString: e.target.value
+      })
+    );
+    e.target.parentElement.innerHTML = t;
+  }
+
+  // Функци изменения статуса задачаи, срабатывает по клику
   function changeStatusFunc(e) {
     dispatch(changeStatus({ idString: e.currentTarget.dataset.id }));
   }
 
+  // Взависимости от состояния фильтрации добовляет элементы списка
   let showList = [...list].map((el) => {
     let li = (
       <li
@@ -79,6 +84,7 @@ export function List() {
     }
   });
 
+  // Эффект срабатывает при перерендере и изменяет колличество элементов списаки для показа на страние
   useEffect(() => {
     dispatch(setCount({ countNumber: document.querySelectorAll("li").length }));
   });

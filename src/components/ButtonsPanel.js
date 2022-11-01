@@ -1,15 +1,17 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { clearCompleted, changeFilter } from "../store/appSlice";
+import { useDispatch, useSelector } from "react-redux"; // Хуки редакса
+import { clearCompleted, changeFilter } from "../store/appSlice"; // Редюсеры  для фильтрации и удаления выполненных щадач
 
 export default function ButtonsPanel() {
   const dispatch = useDispatch();
-  const count = useSelector((state) => state.app.count);
+  const count = useSelector((state) => state.app.count); // Состояние колличество задач
 
+  // Функция удаляет выполненные задачи
   function clearCompletedFunc() {
     dispatch(clearCompleted());
   }
 
+  // Функция изменяет фильтр для показа задач
   function changeFilterFunc(e) {
     dispatch(changeFilter({ filterString: e.target.dataset.title }));
   }

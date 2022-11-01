@@ -1,11 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { addTask } from "../store/appSlice";
-import uuid from "react-uuid";
+import { useDispatch } from "react-redux"; // Хук редакса для изменения состояния
+import { addTask } from "../store/appSlice"; // Редюсер для доьавления задачи
+import uuid from "react-uuid"; // Библиотека для ганерации случайных ID
 
-export function InputTask() {
+export default function InputTask() {
   const dispatch = useDispatch();
 
+  // Функция добавления новой задачи, срабатывае при потере фокуса
   function addNewTask(e) {
     if (e.target.value !== "") {
       dispatch(addTask({ textString: e.target.value, idString: uuid() }));
@@ -13,6 +14,7 @@ export function InputTask() {
     e.target.value = "";
   }
 
+  // Функция сбрасввания фокуса с инпута по нажатию "Enter"
   function addTaskPressEnter(e) {
     if (e.key === "Enter") {
       e.target.blur();
