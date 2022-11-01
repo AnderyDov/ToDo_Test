@@ -49,7 +49,7 @@ export function List() {
           data-id={el.id}
           onClick={changeStatusFunc}
         >
-          {el.status === false && <SvgComponent name="ok" />}
+          {el.status === true && <SvgComponent name="ok" />}
         </div>
         <span
           className="flex items-center overflow-hidden max-w-[70%]  cursor-pointer"

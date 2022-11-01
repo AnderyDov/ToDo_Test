@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const appSlice = createSlice({
   name: "app",
   initialState: {
-    theme: true, // Тема по умолччанию тёмная
+    theme: false, // Тема по умолччанию светлая
     list: []
   },
   reducers: {
@@ -14,7 +14,7 @@ const appSlice = createSlice({
       state.list.push({
         id: action.payload.idString,
         text: action.payload.textString,
-        status: true
+        status: false
       });
     },
     delTask(state, action) {
@@ -37,11 +37,22 @@ const appSlice = createSlice({
         }
         return el;
       });
+    },
+    clearCompleted(state, action) {
+      state.list = state.list.filter((el) => {
+        return el.status === false;
+      });
     }
   }
 });
 
-export const { setTheme, addTask, delTask, changeTask, changeStatus } =
-  appSlice.actions;
+export const {
+  setTheme,
+  addTask,
+  delTask,
+  changeTask,
+  changeStatus,
+  clearCompleted
+} = appSlice.actions;
 
 export default appSlice.reducer;

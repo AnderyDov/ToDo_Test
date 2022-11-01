@@ -1,8 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCompleted } from "../store/appSlice";
 
 export default function ButtonsPanel() {
+  const dispatch = useDispatch();
   const len = useSelector((state) => state.app.list).length;
+
+  function clearCompletedFunc() {
+    dispatch(clearCompleted());
+  }
 
   let out = (
     <div className="flex justify-around my-1">
@@ -33,7 +39,10 @@ export default function ButtonsPanel() {
           Completed
         </button>
       </div>
-      <button className="btn btn-ghost btn-sm text-[10px]">
+      <button
+        className="btn btn-ghost btn-sm text-[10px]"
+        onClick={clearCompletedFunc}
+      >
         Clear completed
       </button>
     </div>
