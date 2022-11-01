@@ -5,6 +5,7 @@ import { clearCompleted, changeFilter } from "../store/appSlice"; // Редюс�
 export default function ButtonsPanel() {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.app.count); // Состояние колличество задач
+  const filter = useSelector((state) => state.app.filter); // Состояние фильтрации
 
   // Функция удаляет выполненные задачи
   function clearCompletedFunc() {
@@ -19,34 +20,34 @@ export default function ButtonsPanel() {
   let out = (
     <div className="flex justify-around my-1">
       <div className="flex items-center">{count} items</div>
-      <div className="flex space-x-1">
-        <button
+      <div className="btn-group">
+        <input
           type="radio"
           name="options"
           data-title="all"
-          onClick={changeFilterFunc}
+          checked={filter === "all" ? true : false}
+          onChange={changeFilterFunc}
           className="btn btn-ghost btn-sm text-[10px]"
-        >
-          All
-        </button>
-        <button
+          value="All"
+        />
+        <input
           type="radio"
           name="options"
           data-title="active"
-          onClick={changeFilterFunc}
+          onChange={changeFilterFunc}
+          checked={filter === "active" ? true : false}
           className="btn btn-ghost btn-sm text-[10px]"
-        >
-          Active
-        </button>
-        <button
+          value="Active"
+        />
+        <input
           type="radio"
           name="options"
           data-title="completed"
-          onClick={changeFilterFunc}
+          onChange={changeFilterFunc}
+          checked={filter === "completed" ? true : false}
           className="btn btn-ghost btn-sm text-[10px]"
-        >
-          Completed
-        </button>
+          value="Completed"
+        />
       </div>
       <button
         className="btn btn-ghost btn-sm text-[10px]"
