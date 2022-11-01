@@ -21,10 +21,18 @@ const appSlice = createSlice({
       state.list = state.list.filter((el) => {
         return el.id !== action.payload.idString;
       });
+    },
+    changeTask(state, action) {
+      state.list.map((el) => {
+        if (el.id === action.payload.idString) {
+          el.text = action.payload.textString;
+        }
+        return el;
+      });
     }
   }
 });
 
-export const { setTheme, addTask, delTask } = appSlice.actions;
+export const { setTheme, addTask, delTask, changeTask } = appSlice.actions;
 
 export default appSlice.reducer;
