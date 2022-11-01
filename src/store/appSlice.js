@@ -4,7 +4,8 @@ const appSlice = createSlice({
   name: "app",
   initialState: {
     theme: false, // Тема по умолччанию светлая
-    list: []
+    list: [],
+    filter: "all"
   },
   reducers: {
     setTheme(state, action) {
@@ -42,6 +43,9 @@ const appSlice = createSlice({
       state.list = state.list.filter((el) => {
         return el.status === false;
       });
+    },
+    changeFilter(state, action) {
+      state.filter = action.payload.filterString;
     }
   }
 });
@@ -52,7 +56,8 @@ export const {
   delTask,
   changeTask,
   changeStatus,
-  clearCompleted
+  clearCompleted,
+  changeFilter
 } = appSlice.actions;
 
 export default appSlice.reducer;

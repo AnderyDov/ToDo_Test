@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearCompleted } from "../store/appSlice";
+import { clearCompleted, changeFilter } from "../store/appSlice";
 
 export default function ButtonsPanel() {
   const dispatch = useDispatch();
@@ -8,6 +8,10 @@ export default function ButtonsPanel() {
 
   function clearCompletedFunc() {
     dispatch(clearCompleted());
+  }
+
+  function changeFilterFunc(e) {
+    dispatch(changeFilter({ filterString: e.target.dataset.title }));
   }
 
   let out = (
@@ -18,6 +22,7 @@ export default function ButtonsPanel() {
           type="radio"
           name="options"
           data-title="all"
+          onClick={changeFilterFunc}
           className="btn btn-ghost btn-sm text-[10px]"
         >
           All
@@ -26,6 +31,7 @@ export default function ButtonsPanel() {
           type="radio"
           name="options"
           data-title="active"
+          onClick={changeFilterFunc}
           className="btn btn-ghost btn-sm text-[10px]"
         >
           Active
@@ -34,6 +40,7 @@ export default function ButtonsPanel() {
           type="radio"
           name="options"
           data-title="completed"
+          onClick={changeFilterFunc}
           className="btn btn-ghost btn-sm text-[10px]"
         >
           Completed

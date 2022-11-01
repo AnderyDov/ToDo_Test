@@ -7,6 +7,7 @@ import ButtonsPanel from "./ButtonsPanel";
 export function List() {
   const dispatch = useDispatch();
   const list = useSelector((state) => state.app.list);
+  const filter = useSelector((state) => state.app.filter);
 
   function deleteItem(e) {
     dispatch(delTask({ idString: e.target.dataset.id }));
@@ -39,7 +40,7 @@ export function List() {
   }
 
   let showList = [...list].map((el) => {
-    return (
+    let li = (
       <li
         className="relative m-4   border-b-[0.5px] flex items-center"
         key={el.id}
@@ -67,6 +68,15 @@ export function List() {
         </button>
       </li>
     );
+    if (filter === "completed" && el.status === true) {
+      return li;
+    }
+    if (filter === "active" && el.status === false) {
+      return li;
+    }
+    if (filter === "all") {
+      return li;
+    }
   });
 
   let out = (
