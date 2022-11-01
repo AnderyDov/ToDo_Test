@@ -14,7 +14,7 @@ const appSlice = createSlice({
       state.list.push({
         id: action.payload.idString,
         text: action.payload.textString,
-        status: "active"
+        status: true
       });
     },
     delTask(state, action) {
@@ -29,10 +29,19 @@ const appSlice = createSlice({
         }
         return el;
       });
+    },
+    changeStatus(state, action) {
+      state.list.map((el) => {
+        if (el.id === action.payload.idString) {
+          el.status = !el.status;
+        }
+        return el;
+      });
     }
   }
 });
 
-export const { setTheme, addTask, delTask, changeTask } = appSlice.actions;
+export const { setTheme, addTask, delTask, changeTask, changeStatus } =
+  appSlice.actions;
 
 export default appSlice.reducer;

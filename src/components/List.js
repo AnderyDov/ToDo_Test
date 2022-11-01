@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SvgComponent from "../components/SvgComponent";
-import { delTask, changeTask } from "../store/appSlice";
+import { delTask, changeTask, changeStatus } from "../store/appSlice";
 import ButtonsPanel from "./ButtonsPanel";
 
 export function List() {
@@ -34,14 +34,22 @@ export function List() {
     inp.onblur = endChangeTaskText;
   }
 
+  function changeStatusFunc(e) {
+    dispatch(changeStatus({ idString: e.currentTarget.dataset.id }));
+  }
+
   let showList = [...list].map((el) => {
     return (
       <li
         className="relative m-4   border-b-[0.5px] flex items-center"
         key={el.id}
       >
-        <div className="w-5 h-5 mr-2 rounded-full outline outline-1 p-1  cursor-pointer">
-          {el.status === "complited" && <SvgComponent name="moon" />}
+        <div
+          className="w-5 h-5 mr-2 rounded-full outline outline-1 p-1  cursor-pointer"
+          data-id={el.id}
+          onClick={changeStatusFunc}
+        >
+          {el.status === false && <SvgComponent name="ok" />}
         </div>
         <span
           className="flex items-center overflow-hidden max-w-[70%]  cursor-pointer"
