@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SvgComponent from "../components/SvgComponent";
-import { delTask, changeTask, changeStatus } from "../store/appSlice";
+import { delTask, changeTask, changeStatus, setCount } from "../store/appSlice";
 import ButtonsPanel from "./ButtonsPanel";
 
 export function List() {
@@ -77,6 +77,10 @@ export function List() {
     if (filter === "all") {
       return li;
     }
+  });
+
+  useEffect(() => {
+    dispatch(setCount({ countNumber: document.querySelectorAll("li").length }));
   });
 
   let out = (

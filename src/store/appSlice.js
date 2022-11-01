@@ -5,7 +5,8 @@ const appSlice = createSlice({
   initialState: {
     theme: false, // Тема по умолччанию светлая
     list: [],
-    filter: "all"
+    filter: "all",
+    count: 0
   },
   reducers: {
     setTheme(state, action) {
@@ -46,6 +47,9 @@ const appSlice = createSlice({
     },
     changeFilter(state, action) {
       state.filter = action.payload.filterString;
+    },
+    setCount(state, action) {
+      state.count = action.payload.countNumber;
     }
   }
 });
@@ -57,7 +61,8 @@ export const {
   changeTask,
   changeStatus,
   clearCompleted,
-  changeFilter
+  changeFilter,
+  setCount
 } = appSlice.actions;
 
 export default appSlice.reducer;

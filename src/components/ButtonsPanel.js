@@ -1,10 +1,10 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearCompleted, changeFilter } from "../store/appSlice";
 
 export default function ButtonsPanel() {
   const dispatch = useDispatch();
-  const len = useSelector((state) => state.app.list).length;
+  const count = useSelector((state) => state.app.count);
 
   function clearCompletedFunc() {
     dispatch(clearCompleted());
@@ -16,7 +16,7 @@ export default function ButtonsPanel() {
 
   let out = (
     <div className="flex justify-around my-1">
-      <div className="flex items-center">{len} items</div>
+      <div className="flex items-center">{count} items</div>
       <div className="flex space-x-1">
         <button
           type="radio"
